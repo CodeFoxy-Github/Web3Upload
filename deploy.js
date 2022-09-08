@@ -12,22 +12,19 @@ function die(message) {
 
 async function deploy() {
   const { WEB3STORAGE_TOKEN } = process.env
-  if (!WEB3STORAGE_TOKEN) {
-    die('this script needs an env variable named WEB3STORAGE_TOKEN containing API token for web3.storage')
-  }
-  
-  if (!fs.existsSync('./dist')) {
-    die('dist folder not found. Try running this first: npm run build')
-  }
   
   const web3Storage = new Web3Storage({ token: WEB3STORAGE_TOKEN })
   console.log('Loading site files...')
   const files = await getFilesFromPath('./dist')
   console.log(`Uploading ${files.length} files to Web3.Storage...`)
   const cid = await web3Storage.put(files, { wrapWithDirectory: false })
+
+var fs = require("fs");
+
+var writeStream = fs.createWriteStream("link.txt");
+writeStream.write(`https://${cid}.ipfs.w3s.link/`);
+writeStream.end();
   console.log('Deployed to Web3.Storage!')
-  console.log('Root cid: ', cid)
-  console.log(`Gateway url: https://${cid}.ipfs.dweb.link`)
 }
 
 deploy()
