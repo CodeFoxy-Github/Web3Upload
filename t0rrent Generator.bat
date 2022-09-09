@@ -15,9 +15,9 @@ for /F "delims=" %%x in (link.txt) do (
 set id=%%x
 )
 set "link=!id!"
-echo **please dont edit this file**> File.t0rrent
-echo %random%%random%%random%%random%%random%.Content.id>> File.t0rrent
-echo %link%%filepath%>> File.t0rrent
+echo **please dont edit this file**> File.web3
+echo %random%%random%%random%%random%%random%.Content.id>> File.web3
+echo %link%%filepath%>> File.web3
 DEL link.txt -q -f
 cls
 echo Create Completed (Dont Change Filename)

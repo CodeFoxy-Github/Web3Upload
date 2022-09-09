@@ -1,22 +1,23 @@
 @echo off
+cls
 setlocal enabledelayedexpansion
-Set "file=%USERPROFILE%\Downloads"
-set /p file=t0rrent File Path (Default is Download Folder) 
-
-timeout /t 1
-cd %path%
+Set "download=%USERPROFILE%\Downloads"
+set /p "file=web3 File Path (Default is Download Folder) "
+set /p "download=download path "
+copy wget.exe %download%
+cd %file%
 cls
 echo Loading...
 @echo off
-for /F "delims=" %%x in (File.t0rrent) do (
+for /F "delims=" %%x in (File.web3) do (
 set id=%%x
 )
-ping 127.0.0.1 -n 6 > nul
 cls
 echo Downloading...
 set "link=!id!"
-cd %USERPROFILE%\Downloads
-bitsadmin /transfer DownloadWorker /download /priority normal %link%
+cd %download%
+wget %link%
 cls
-echo Downloaded To download folder.
+DEL wget.exe -q -f
+echo Downloaded!
 pause
